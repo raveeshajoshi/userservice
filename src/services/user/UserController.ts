@@ -1,12 +1,17 @@
-import { getPlaces } from "./../providers/postGresDataProvider";
+import { getUserInfo } from "./../providers/postGresDataProvider";
 
-export const getPlacesByName = async (q: string) => {
-  if (q.length < 3) {
+export const isValidUser = async (q: string) => {
+  let userInfo = await getUserInfo(q);
+  if(userInfo){
     return {
-      type: "FeatureCollection",
-      features: []
-    };
+      "response_code":"OK",
+      "valid_user":"OK"
+    }
+  }else{
+    return {
+      "response_code":"OK",
+      "valid_user":"NOT_OK"
+    }
   }
-
-  return await getPlaces(q);
+  return await getUserInfo(q);
 };
