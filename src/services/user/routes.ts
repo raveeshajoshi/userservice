@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getPlacesByName } from "./UserController";
+import { isValidUser } from "./UserController";
 import { checkSearchParams } from "./../../middleware/check";
 
 export default [
@@ -9,7 +9,7 @@ export default [
     handler: [
       checkSearchParams, // <-- this line
       async ({ query }: Request, res: Response) => {
-        const result = await getPlacesByName(query.q);
+        const result = await isValidUser(query.q);
         res.status(200).send(result);
       }
     ]
